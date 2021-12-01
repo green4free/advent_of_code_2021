@@ -16,8 +16,11 @@ fn main() -> Result<(), Error> {
     let vec = read(File::open("input.txt")?)?;
     // use `vec` for whatever
     let mut n:u32 = 0;
-    for p in vec.windows(2) {
-        n += (p[1] > p[0]) as u32;
+    let mut last_sum:u32 = u32::MAX; 
+    for w in vec.windows(3) {
+        let sum = w.iter().sum(); 
+        n += (sum > last_sum) as u32;
+        last_sum = sum;
     }
 	//println!("{:?}", vec);
     println!("{}",n);
